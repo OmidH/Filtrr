@@ -5,6 +5,8 @@ based on Alex Michael's filtrr.js (https://github.com/alexmic/filtrr)
 At this point thousand thanks to Alex for sharing.
 
 If you like this, like us on Facebook :) http://www.facebook.com/WeAre42dp
+and feel free to join the iOS developer group on Facebook: 
+	http://www.facebook.com/groups/130540617023687/
 
 Copyright (C) 2012 42dp
 
@@ -31,35 +33,36 @@ How to use
 
 This is pretty simple:
 
-1. a) #import "UIImage+FiltrrCompositions.h" if you want to use the predefined effects
+1. a) `#import "UIImage+FiltrrCompositions.h"` if you want to use the predefined effects
 	or
-   b) #import "UIImage+Filtrr.h" if you want to compose your own effects
+   b) `#import "UIImage+Filtrr.h"` if you want to compose your own effects
 
 2a) Just call the method on your image and you will get back a manipulated image.
-        UIImage *img = [UIImage imageNamed:@"test.jpg"];
-        img = [img e1];
-        anImageViewController.image = img;
+    UIImage *img = [UIImage imageNamed:@"test.jpg"];
+    img = [img e1];
+    anImageViewController.image = img;
 
 2b) To compose your own effect:
-		UIImage *img = [UIImage imageNamed:@"test.jpg"];
-		
-		UIImage *topImage = [img duplicate];
-    	topImage = [[topImage saturationByFactor:0] blur];
+
+    UIImage *img = [UIImage imageNamed:@"test.jpg"];
     
-    	img = [self multiply:topImage];
+    UIImage *topImage = [img duplicate];
+    topImage = [[topImage saturationByFactor:0] blur];
+
+    img = [self multiply:topImage];
     
-    	RGBA minrgb, maxrgb;
+    RGBA minrgb, maxrgb;
     
-    	minrgb.red = 60;
-    	minrgb.green = 35;
-    	minrgb.blue = 10;
+    minrgb.red = 60;
+    minrgb.green = 35;
+    minrgb.blue = 10;
     
-    	maxrgb.red = 170;
-    	maxrgb.green = 140;
-    	maxrgb.blue = 160;
+    maxrgb.red = 170;
+    maxrgb.green = 140;
+    maxrgb.blue = 160;
     
-    	img = [[[self tintWithMinRGB:minrgb MaxRGB:maxrgb] contrastByFactor:0.8] brightnessByFactor:10];
-    	
-    	anImageViewController.image = img;
+    img = [[[self tintWithMinRGB:minrgb MaxRGB:maxrgb] contrastByFactor:0.8] brightnessByFactor:10];
+    
+    anImageViewController.image = img;
 
 Enjoy it and feel free to send me your composed effects!
