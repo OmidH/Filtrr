@@ -1,0 +1,65 @@
+Filtrr - An iOS Image filter library
+
+based on Alex Michael's filtrr.js (https://github.com/alexmic/filtrr)
+
+At this point thousand thanks to Alex for sharing.
+
+If you like this, like us on Facebook :) http://www.facebook.com/WeAre42dp
+
+Copyright (C) 2012 42dp
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+How to use
+-----------
+
+This is pretty simple:
+
+1. a) #import "UIImage+FiltrrCompositions.h" if you want to use the predefined effects
+	or
+   b) #import "UIImage+Filtrr.h" if you want to compose your own effects
+
+2a) Just call the method on your image and you will get back a manipulated image.
+        UIImage *img = [UIImage imageNamed:@"test.jpg"];
+        img = [img e1];
+        anImageViewController.image = img;
+
+2b) To compose your own effect:
+		UIImage *img = [UIImage imageNamed:@"test.jpg"];
+		
+		UIImage *topImage = [img duplicate];
+    	topImage = [[topImage saturationByFactor:0] blur];
+    
+    	img = [self multiply:topImage];
+    
+    	RGBA minrgb, maxrgb;
+    
+    	minrgb.red = 60;
+    	minrgb.green = 35;
+    	minrgb.blue = 10;
+    
+    	maxrgb.red = 170;
+    	maxrgb.green = 140;
+    	maxrgb.blue = 160;
+    
+    	img = [[[self tintWithMinRGB:minrgb MaxRGB:maxrgb] contrastByFactor:0.8] brightnessByFactor:10];
+    	
+    	anImageViewController.image = img;
+
+Enjoy it and feel free to send me your composed effects!

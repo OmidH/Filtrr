@@ -5,8 +5,9 @@
 //  Created by Omid Hashemi & Stefan Klefisch on 2/6/12.
 //  Copyright (c) 2012 42dp. All rights reserved.
 //  http://www.42dp.com
+//  Github: https://github.com/OmidH/Filtrr
 //
-//  Based on Alex Michael's filtrr for Javascript
+//  Based on Alex Michael's filtrr for Javascript (thanks for sharing Alex)
 //  https://github.com/alexmic/filtrr
 
 #import "UIImage+FiltrrCompositions.h"
