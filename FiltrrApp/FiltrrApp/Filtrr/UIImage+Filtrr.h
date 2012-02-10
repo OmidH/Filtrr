@@ -100,4 +100,9 @@ static inline RGBA RGBAMake(int r, int g, int b, int a)
 - (id) exclusion:(UIImage *)topFltr;
 - (id) softLight:(UIImage *)topFltr;
 
+- (float) calc_bias:(float) f Bias:(float) bi;
+- (float) calc_contrast:(float) f contrast:(float) c;
+- (float) calc_overlay:(float)b other:(float) t;
+- (float) calc_softlight:(float)b other:(float) t;
+
 @end

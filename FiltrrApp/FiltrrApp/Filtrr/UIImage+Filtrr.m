@@ -20,11 +20,6 @@
 
 -(unsigned char*) convolveRaw:(NSArray *) kernel InData:(unsigned char *)inData OuData:(unsigned char*)outData Height:(uint)_height Width:(uint)_width;
 
--(float) calc_bias:(float) f Bias:(float) bi;
--(float) calc_contrast:(float) f contrast:(float) c;
--(float) calc_overlay:(float)b other:(float) t;
--(float) calc_softlight:(float)b other:(float) t;
-
 @end
 
 @implementation UIImage (Filtrr) 
