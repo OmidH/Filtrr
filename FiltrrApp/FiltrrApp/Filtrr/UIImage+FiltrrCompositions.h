@@ -15,6 +15,8 @@
 
 @interface UIImage (FiltrrCompositions)
 
+-(id) trackTime:(NSString *)method;
+
 - (id) e1;
 - (id) e2;
 - (id) e3;

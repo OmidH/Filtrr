@@ -163,42 +163,82 @@
 }
 
 #pragma mark - Core
+//
+//- (id) applyFiltrr:(RGBA (^)(int r, int g, int b, int a))fn {
+//    
+//    int i = 0, j = 0;
+//    
+//    CGContextRef cgctx = [self createARGBBitmapContextFromImage:self.CGImage];
+//    size_t _width = CGImageGetWidth(self.CGImage);
+//    size_t _height = CGImageGetHeight(self.CGImage);
+//    
+//    // Now we can get a pointer to the image data associated with the bitmap
+//    // context.
+//    unsigned char* data = CGBitmapContextGetData (cgctx);
+//    if (data != NULL) {
+//        for (i = 0; i < _height; i++) {
+//            for (j = 0; j < _width; j++) {
+//                //offset locates the pixel in the data from x,y.
+//                //4 for 4 bytes of data per pixel, w is width of one row of data.
+//                int offset = (i*_width*4)+(j*4);
+//                int red = data[offset];
+//                int green = data[offset+1];
+//                int blue = data[offset+2];
+//                int alpha =  data[offset+3];
+//                
+//                RGBA newColors = fn(red, green, blue, alpha);
+//                
+//                data[offset]   = newColors.red;
+//                data[offset+1] = newColors.green;
+//                data[offset+2] = newColors.blue;
+//                data[offset+3] = newColors.alpha;
+//            }
+//        }
+//    }
+//    
+//    UIImage *img = [self createImageFromContext:cgctx WithSize:CGSizeMake(_width, _height)];
+//    // Free image data memory for the context
+//    if (data) { free(data); }
+//    
+//    return img;
+//}
 
 - (id) applyFiltrr:(RGBA (^)(int r, int g, int b, int a))fn {
+    return [self applyFiltrrByStep:4 
+                           ShiftIn:DataFieldMake(1, 2, 3, 0) 
+                          ShiftOut:DataFieldMake(0, 1, 2, 3) 
+                          Callback:fn];
+}
+
+- (id) applyFiltrrByStep:(int) step ShiftIn:(DataField)shiftIn ShiftOut:(DataField)shiftOut Callback:(RGBA (^)(int r, int g, int b, int a))fn {
     
-    int i = 0, j = 0;
+    int i = 0;
+    
+    step = (step == 0) ? 4 : step;
     
     CGContextRef cgctx = [self createARGBBitmapContextFromImage:self.CGImage];
     size_t _width = CGImageGetWidth(self.CGImage);
     size_t _height = CGImageGetHeight(self.CGImage);
     
-    // Now we can get a pointer to the image data associated with the bitmap
-    // context.
     unsigned char* data = CGBitmapContextGetData (cgctx);
-    if (data != NULL) {
-        for (i = 0; i < _height; i++) {
-            for (j = 0; j < _width; j++) {
-                //offset locates the pixel in the data from x,y.
-                //4 for 4 bytes of data per pixel, w is width of one row of data.
-                int offset = (i*_width*4)+(j*4);
-                int alpha =  data[offset];
-                int red = data[offset+1];
-                int green = data[offset+2];
-                int blue = data[offset+3];
-//                NSLog(@"%lu - offset: %i colors: RGB A %i %i %i  %i",(offset*100)/(width*4)+(height*4), offset,red,green,blue,alpha);
-                
-                RGBA newColors = fn(red, green, blue, alpha);
-                
-                data[offset] = newColors.alpha;
-                data[offset+1] = newColors.red;
-                data[offset+2] = newColors.green;
-                data[offset+3] = newColors.blue;
-            }
+    if (data != NULL) {  
+        int max = _width * _height * 4;
+        
+        for (i = 0; i < max; i+=step) {
+            
+            RGBA newColors;
+            
+            newColors = fn(data[i + shiftIn.one], data[i + shiftIn.two], data[i + shiftIn.three], data[i + shiftIn.four]);
+            
+            data[i + shiftOut.one]   = newColors.alpha;
+            data[i + shiftOut.two] = newColors.red;
+            data[i + shiftOut.three] = newColors.green;
+            data[i + shiftOut.four] = newColors.blue;
         }
     }
     
     UIImage *img = [self createImageFromContext:cgctx WithSize:CGSizeMake(_width, _height)];
-    // Free image data memory for the context
+
     if (data) { free(data); }
     
     return img;
@@ -701,7 +741,7 @@
     UIImage *newImage = [self createImageFromContext:bottomCGctx WithSize:CGSizeMake(_width, _height)];
 
     if(blendData) free(blendData);
-    if(imageData) free(imageData);
+    //if(imageData) free(imageData);
     
     return newImage;
     

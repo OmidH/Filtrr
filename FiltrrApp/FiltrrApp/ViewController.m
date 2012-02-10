@@ -72,8 +72,19 @@
     [self.navigationController pushViewController:nextViewController animated:YES];
     
     if(((NSString *)[[arrEffects objectAtIndex:indexPath.row] valueForKey:@"method"]).length > 0) {
+        
+#ifndef TRACKTIME
+        
         SEL _selector = NSSelectorFromString([[arrEffects objectAtIndex:indexPath.row] valueForKey:@"method"]);
         nextViewController.ivPic.image = [nextViewController.ivPic.image performSelector:_selector];
+        
+#else
+        
+        SEL _track = NSSelectorFromString(@"trackTime:");
+        nextViewController.ivPic.image = [nextViewController.ivPic.image performSelector:_track withObject:[[arrEffects objectAtIndex:indexPath.row] valueForKey:@"method"]];
+        
+#endif
+        
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

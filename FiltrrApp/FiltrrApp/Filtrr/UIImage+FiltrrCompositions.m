@@ -15,6 +15,22 @@
 
 @implementation UIImage (FiltrrCompositions)
 
+#pragma mark - DebugHelper
+
+-(id) trackTime:(NSString *)method {
+    NSDate *startdate = [NSDate date]; 
+    
+    SEL _selector = NSSelectorFromString(method);
+    id retVal = [self performSelector:_selector];
+    
+    NSDate *enddate = [NSDate date];
+    
+    NSTimeInterval diff = [enddate timeIntervalSinceDate:startdate];
+    NSLog(@"returning new image from %@ with time: %f", method, diff);
+    
+    return retVal;
+}
+
 #pragma mark - Compositions
 
 -(id) e1 {
@@ -36,9 +52,8 @@
     
     newImage = [[[self tintWithMinRGB:minrgb MaxRGB:maxrgb] contrastByFactor:0.8] brightnessByFactor:10];
     
-    NSLog(@"returning new image");
-    
     return newImage;
+    
 }
 
 -(id) e2 {
