@@ -161,24 +161,6 @@
 }
 
 - (id) e9 { 
-//    UIImage *topImage1 = [self duplicate];
-//    UIImage *topImage2 = [self duplicate];
-//    
-//    topImage2 = [[topImage2 fillRedChannel:226 GreenChannel:217 BlueChannel:113] saturationByFactor:0.2];
-//    topImage1 = [[topImage1 gaussianBlur] saturationByFactor:0.2];
-//    topImage1 = [topImage1 multiply:topImage2];
-//    
-//    RGBA minrgb, maxrgb;
-//    
-//    minrgb.red = 30;
-//    minrgb.green = 45;
-//    minrgb.blue = 40;
-//    
-//    maxrgb.red = 110;
-//    maxrgb.green = 190;
-//    maxrgb.blue = 110;
-//    
-//    return [[[[[[self saturationByFactor:0.2] tintWithMinRGB:minrgb MaxRGB:maxrgb] multiply: topImage1] brightnessByFactor:20] sharpen] contrastByFactor:1.1];
     
     UIImage *topImage = [self duplicate];
     
@@ -264,6 +246,91 @@
 
 - (id) e10 { 
     return [[self sepia] biasByFactor:0.6];
+}
+
+
+- (id) e11 { 
+    
+    UIImage *topImage = [self duplicate];
+    
+    DataField shiftIn = DataFieldMake(1, 2, 3, 0);
+    DataField shiftOut = DataFieldMake(1, 1, 1, 2);
+    
+    topImage = [topImage applyFiltrrByStep:4 
+                                   ShiftIn:shiftIn
+                                  ShiftOut:shiftOut
+                                  Callback:^RGBA (int r, int g, int b, int a) {
+                                      RGBA retVal;
+                                      int t = 0;
+                                      float avg = (r + g + b) / 3.0;
+                                      
+                                      retVal.red = [topImage safe:avg + t * (r - avg)];
+                                      retVal.green = [topImage safe:avg + t * (g - avg)];
+                                      retVal.blue = [topImage safe:avg + t * (b - avg)];
+                                      retVal.alpha = a;
+                                      
+                                      return retVal;
+                                  }];
+    
+    topImage = [topImage blur];
+    
+    UIImage * newImage = [self multiply:topImage];
+    
+    RGBA minrgb, maxrgb;
+    
+    minrgb.red = 60;
+    minrgb.green = 35;
+    minrgb.blue = 10;
+    
+    maxrgb.red = 170;
+    maxrgb.green = 140;
+    maxrgb.blue = 160;
+    
+    newImage = [newImage applyFiltrrByStep:4 
+                                   ShiftIn:shiftIn
+                                  ShiftOut:shiftOut
+                                  Callback:^RGBA (int r, int g, int b, int a) {
+                                      RGBA retVal;
+                                      
+                                      retVal.red = [newImage safe:(r - minrgb.red) * (255.0 / (maxrgb.red - minrgb.red))];
+                                      retVal.green = [newImage safe:(g - minrgb.green) * (255.0 / (maxrgb.green - minrgb.green))];
+                                      retVal.blue = [newImage safe:(b - minrgb.blue) * (255.0 / (maxrgb.blue - minrgb.blue))];
+                                      retVal.alpha = a;
+                                      
+                                      return retVal;
+                                  }];
+    
+    newImage = [newImage applyFiltrrByStep:4 
+                                   ShiftIn:shiftIn
+                                  ShiftOut:shiftOut
+                                  Callback:^RGBA (int r, int g, int b, int a) {
+                                      RGBA retVal;
+                                      float val = 0.8;
+                                      
+                                      retVal.red = [newImage safe:(255.0 * [newImage calc_contrast:(r / 255.0) contrast:val])];
+                                      retVal.green = [newImage safe:(255.0 * [newImage calc_contrast:(g / 255.0) contrast:val])];
+                                      retVal.blue = [newImage safe:(255.0 * [newImage calc_contrast:(b / 255.0) contrast:val])];
+                                      retVal.alpha = a;
+                                      
+                                      return retVal;
+                                  }];
+    
+    newImage = [newImage applyFiltrrByStep:4 
+                                   ShiftIn:shiftIn
+                                  ShiftOut:shiftOut
+                                  Callback:^RGBA (int r, int g, int b, int a) {
+                                      RGBA retVal;
+                                      float t = 10.0; 
+                                      retVal.red = [newImage safe:r + t];
+                                      retVal.green = [newImage safe:g + t];
+                                      retVal.blue = [newImage safe:b + t];
+                                      retVal.alpha = a;
+                                      
+                                      return retVal;
+                                  }];
+    
+    return newImage;
+    
 }
 
 @end
