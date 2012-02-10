@@ -33,9 +33,9 @@ How to use
 
 This is pretty simple:
 
-1. a) `#import "UIImage+FiltrrCompositions.h"` if you want to use the predefined effects
+1. a) #import "UIImage+FiltrrCompositions.h" if you want to use the predefined effects
 	or
-   b) `#import "UIImage+Filtrr.h"` if you want to compose your own effects
+   b) #import "UIImage+Filtrr.h" if you want to compose your own effects
 
 2a) Just call the method on your image and you will get back a manipulated image.
     UIImage *img = [UIImage imageNamed:@"test.jpg"];
