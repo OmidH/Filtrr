@@ -15,6 +15,7 @@
     
     UIImagePickerController * imagePicker;
     UIImage *selectedImage, *thumbImage;
+    UIImage *minithumbImage;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *tblEffects;

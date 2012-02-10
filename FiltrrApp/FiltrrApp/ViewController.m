@@ -49,6 +49,7 @@
     
     selectedImage = [UIImage imageNamed:@"filtrr_back.jpg"];
     thumbImage = [selectedImage scaleToSize:CGSizeMake(320, 320)];
+    minithumbImage = [thumbImage scaleToSize:CGSizeMake(40, 40)];
 }
 
 - (void)viewDidUnload
@@ -86,6 +87,12 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
+    
+    if(((NSString *)[[arrEffects objectAtIndex:indexPath.row] valueForKey:@"method"]).length > 0) {
+        SEL _selector = NSSelectorFromString([[arrEffects objectAtIndex:indexPath.row] valueForKey:@"method"]);
+        cell.imageView.image = [minithumbImage performSelector:_selector];
+    } else 
+        cell.imageView.image = minithumbImage;
     
     cell.textLabel.text = [(NSDictionary *)[arrEffects objectAtIndex:indexPath.row] valueForKey:@"title"];
     
@@ -131,6 +138,10 @@
     // Access the uncropped image from info dictionary
     selectedImage =  [info objectForKey:UIImagePickerControllerEditedImage];//[info objectForKey:@"UIImagePickerControllerOriginalImage"];
     thumbImage = [selectedImage scaleToSize:CGSizeMake(320, 320)];
+    minithumbImage = [thumbImage scaleToSize:CGSizeMake(40, 40)];
+    
+    [_tblEffects reloadData];
+    
     [picker dismissModalViewControllerAnimated:YES];
     
     // Save image
