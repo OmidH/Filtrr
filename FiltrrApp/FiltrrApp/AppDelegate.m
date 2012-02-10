@@ -26,6 +26,8 @@
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
     self.navController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     self.navController.title = @"Effects";
+    self.navController.navigationBar.tintColor = [UIColor blackColor];
+    self.navController.delegate = self.viewController;
     
     //self.window.rootViewController = self.viewController;
     [self.window addSubview:self.navController.view];

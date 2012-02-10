@@ -20,6 +20,7 @@
 		2E4071CA14E526F700E4982C /* filtrr_back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2E4071C414E526F700E4982C /* filtrr_back.jpg */; };
 		2E4071CB14E526F700E4982C /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4071C614E526F700E4982C /* ImageViewController.m */; };
 		2E4071CC14E526F700E4982C /* ImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E4071C714E526F700E4982C /* ImageViewController.xib */; };
+		2E86673A14E57929006C7CE8 /* UIImage+Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E86673914E57929006C7CE8 /* UIImage+Scale.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,8 @@
 		2E4071C514E526F700E4982C /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		2E4071C614E526F700E4982C /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		2E4071C714E526F700E4982C /* ImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageViewController.xib; sourceTree = "<group>"; };
+		2E86673814E57929006C7CE8 /* UIImage+Scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Scale.h"; sourceTree = "<group>"; };
+		2E86673914E57929006C7CE8 /* UIImage+Scale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Scale.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +126,8 @@
 				2E4071C114E526F700E4982C /* UIImage+Filtrr.m */,
 				2E4071C214E526F700E4982C /* UIImage+FiltrrCompositions.h */,
 				2E4071C314E526F700E4982C /* UIImage+FiltrrCompositions.m */,
+				2E86673814E57929006C7CE8 /* UIImage+Scale.h */,
+				2E86673914E57929006C7CE8 /* UIImage+Scale.m */,
 			);
 			path = Filtrr;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 				2E4071C814E526F700E4982C /* UIImage+Filtrr.m in Sources */,
 				2E4071C914E526F700E4982C /* UIImage+FiltrrCompositions.m in Sources */,
 				2E4071CB14E526F700E4982C /* ImageViewController.m in Sources */,
+				2E86673A14E57929006C7CE8 /* UIImage+Scale.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,11 +9,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController :  UIViewController<UITableViewDataSource, UITableViewDelegate> {
+@interface ViewController :  UIViewController<UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     NSString *filename;
     NSMutableArray *arrEffects;
+    
+    UIImagePickerController * imagePicker;
+    UIImage *selectedImage, *thumbImage;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *tblEffects;
+
+-(void) showCam;
 
 @end

@@ -10,6 +10,7 @@
 #import "ViewController.h"
 #import "ImageViewController.h"
 #import "UIImage+FiltrrCompositions.h"
+#import "UIImage+Scale.h"
 
 @implementation ViewController
 
@@ -40,6 +41,13 @@
                   [NSDictionary dictionaryWithObjectsAndKeys:@"E9",@"title",@"e9",@"method", nil],
                   [NSDictionary dictionaryWithObjectsAndKeys:@"E10",@"title",@"e10",@"method", nil],
                   nil];
+    
+    UIBarButtonItem *cam = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(showCam)];
+    self.navigationItem.rightBarButtonItem = cam;
+    self.title = @"Effects";
+    
+    selectedImage = [UIImage imageNamed:@"filtrr_back.jpg"];
+    thumbImage = [selectedImage scaleToSize:CGSizeMake(320, 320)];
 }
 
 - (void)viewDidUnload
@@ -47,6 +55,23 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+-(void) showCam {
+    NSLog(@"...");
+    imagePicker = [[UIImagePickerController alloc] init];
+    // Set source to the camera
+#if (TARGET_IPHONE_SIMULATOR)
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+#else
+    imagePicker.sourceType =  UIImagePickerControllerSourceTypeCamera;
+#endif
+    // Delegate is self
+    imagePicker.delegate = self;
+    // Allow editing of image ?
+    [imagePicker setAllowsEditing:YES];
+    // Show image picker
+    [self presentModalViewController:imagePicker animated:YES];
 }
 
 -(int) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -67,8 +92,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     ImageViewController *nextViewController = [[ImageViewController alloc] initWithNibName:@"ImageViewController" bundle:nil];
     nextViewController.title = [[arrEffects objectAtIndex:indexPath.row] valueForKey:@"title"];
+    
     [self.navigationController pushViewController:nextViewController animated:YES];
     
     if(((NSString *)[[arrEffects objectAtIndex:indexPath.row] valueForKey:@"method"]).length > 0) {
@@ -76,15 +103,17 @@
 #ifndef TRACKTIME
         
         SEL _selector = NSSelectorFromString([[arrEffects objectAtIndex:indexPath.row] valueForKey:@"method"]);
-        nextViewController.ivPic.image = [nextViewController.ivPic.image performSelector:_selector];
+        [nextViewController setImage:[thumbImage performSelector:_selector]];
         
 #else
         
         SEL _track = NSSelectorFromString(@"trackTime:");
-        nextViewController.ivPic.image = [nextViewController.ivPic.image performSelector:_track withObject:[[arrEffects objectAtIndex:indexPath.row] valueForKey:@"method"]];
+        [nextViewController setImage:[thumbImage performSelector:_track withObject:[[arrEffects objectAtIndex:indexPath.row] valueForKey:@"method"]]];
         
 #endif
         
+    } else {
+        [nextViewController setImage:thumbImage];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -94,6 +123,17 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}
+
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    // Access the uncropped image from info dictionary
+    selectedImage =  [info objectForKey:UIImagePickerControllerEditedImage];//[info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    thumbImage = [selectedImage scaleToSize:CGSizeMake(320, 320)];
+    [picker dismissModalViewControllerAnimated:YES];
+    
+    // Save image
+//    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 
 @end

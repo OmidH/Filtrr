@@ -14,4 +14,8 @@
 
 @property (nonatomic, retain) IBOutlet UIImageView *ivPic;
 
+
+-(void) setImage:(UIImage *)img;
+-(void) save;
+
 @end
