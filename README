@@ -52,14 +52,9 @@ This is pretty simple:
     img = [self multiply:topImage];
     
     RGBA minrgb, maxrgb;
-    
-    minrgb.red = 60;
-    minrgb.green = 35;
-    minrgb.blue = 10;
-    
-    maxrgb.red = 170;
-    maxrgb.green = 140;
-    maxrgb.blue = 160;
+
+    minrgb = RGBAMake(60, 35, 10, 255);
+    maxrgb = RGBAMake(170, 140, 160, 255);
     
     img = [[[self tintWithMinRGB:minrgb MaxRGB:maxrgb] contrastByFactor:0.8] brightnessByFactor:10];
     

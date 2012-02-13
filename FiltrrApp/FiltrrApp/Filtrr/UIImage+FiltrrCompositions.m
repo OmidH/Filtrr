@@ -278,13 +278,8 @@
     
     RGBA minrgb, maxrgb;
     
-    minrgb.red = 60;
-    minrgb.green = 35;
-    minrgb.blue = 10;
-    
-    maxrgb.red = 170;
-    maxrgb.green = 140;
-    maxrgb.blue = 160;
+    minrgb = RGBAMake(60, 35, 10, 255);    
+    maxrgb = RGBAMake(170, 140, 160, 255);
     
     newImage = [newImage applyFiltrrByStep:4 
                                    ShiftIn:shiftIn
