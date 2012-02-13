@@ -20,6 +20,7 @@
 		2E4071CA14E526F700E4982C /* filtrr_back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2E4071C414E526F700E4982C /* filtrr_back.jpg */; };
 		2E4071CB14E526F700E4982C /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E4071C614E526F700E4982C /* ImageViewController.m */; };
 		2E4071CC14E526F700E4982C /* ImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2E4071C714E526F700E4982C /* ImageViewController.xib */; };
+		2E53DA1914E92A17006F1CC9 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E53DA1814E92A17006F1CC9 /* ImageIO.framework */; };
 		2E86673A14E57929006C7CE8 /* UIImage+Scale.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E86673914E57929006C7CE8 /* UIImage+Scale.m */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		2E4071C514E526F700E4982C /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		2E4071C614E526F700E4982C /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		2E4071C714E526F700E4982C /* ImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageViewController.xib; sourceTree = "<group>"; };
+		2E53DA1814E92A17006F1CC9 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		2E86673814E57929006C7CE8 /* UIImage+Scale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Scale.h"; sourceTree = "<group>"; };
 		2E86673914E57929006C7CE8 /* UIImage+Scale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Scale.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E53DA1914E92A17006F1CC9 /* ImageIO.framework in Frameworks */,
 				2E40719E14E526B800E4982C /* UIKit.framework in Frameworks */,
 				2E4071A014E526B800E4982C /* Foundation.framework in Frameworks */,
 				2E4071A214E526B800E4982C /* CoreGraphics.framework in Frameworks */,
@@ -66,6 +69,7 @@
 		2E40718E14E526B800E4982C = {
 			isa = PBXGroup;
 			children = (
+				2E53DA1814E92A17006F1CC9 /* ImageIO.framework */,
 				2E4071A314E526B800E4982C /* FiltrrApp */,
 				2E40719C14E526B800E4982C /* Frameworks */,
 				2E40719A14E526B800E4982C /* Products */,
