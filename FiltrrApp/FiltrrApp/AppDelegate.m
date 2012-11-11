@@ -29,7 +29,6 @@
     self.navController.navigationBar.tintColor = [UIColor blackColor];
     self.navController.delegate = self.viewController;
     
-    //self.window.rootViewController = self.viewController;
     [self.window addSubview:self.navController.view];
     
     [self.window makeKeyAndVisible];

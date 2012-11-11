@@ -285,7 +285,9 @@
     
     unsigned char* inData = CGBitmapContextGetData (cgctx);
     NSData* pixelData = (__bridge NSData*) CGDataProviderCopyData(CGImageGetDataProvider(self.CGImage));
-    unsigned char* outData = (unsigned char*)[pixelData bytes];
+    NSMutableData* mutablePixelData = [pixelData mutableCopy];
+//    unsigned char* outData = (unsigned char*)[pixelData bytes];
+    unsigned char* outData = (unsigned char*)[mutablePixelData mutableBytes];
     
     outData = [self convolveRaw:kernel InData:inData OuData:outData Height:_height Width:_width];
     

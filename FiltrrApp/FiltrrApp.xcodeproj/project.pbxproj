@@ -162,7 +162,7 @@
 		2E40719014E526B800E4982C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = 42dp;
 			};
 			buildConfigurationList = 2E40719314E526B800E4982C /* Build configuration list for PBXProject "FiltrrApp" */;
