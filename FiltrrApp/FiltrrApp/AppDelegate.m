@@ -31,8 +31,6 @@
     
     [self.window setRootViewController:self.navController];
     
-    [self.window addSubview:self.navController.view];
-    
     [self.window makeKeyAndVisible];
     return YES;
 }
